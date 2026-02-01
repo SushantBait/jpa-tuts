@@ -10,4 +10,5 @@ public class JpaTutorialApplication {
 		SpringApplication.run(JpaTutorialApplication.class, args);
 	}
 
+
 }
