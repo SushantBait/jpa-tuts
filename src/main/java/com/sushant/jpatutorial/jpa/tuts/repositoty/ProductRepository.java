@@ -1,6 +1,7 @@
 package com.sushant.jpatutorial.jpa.tuts.repositoty;
 
 import com.sushant.jpatutorial.jpa.tuts.entites.ProductEntity;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -37,7 +38,11 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     Optional<ProductEntity> findByTitleAndPrice(String coke, BigDecimal bigDecimal);
 
     List<ProductEntity> findAllByOrderByPriceAsc();
+
+    List<ProductEntity> findByTitleContainingIgnoreCase(String title, PageRequest of);
 }
+
+
 
 /*  ***************** JPA (Java Persistence API)   *****************
 

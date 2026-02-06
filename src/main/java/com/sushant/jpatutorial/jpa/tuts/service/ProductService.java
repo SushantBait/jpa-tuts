@@ -6,6 +6,8 @@ import com.sushant.jpatutorial.jpa.tuts.repositoty.ProductRepository;
 import org.apache.catalina.mapper.Mapper;
 import org.jspecify.annotations.Nullable;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
+
+    private final int PAGE_SIZE = 5;
 
     ProductRepository productRepository;
 
@@ -40,5 +44,14 @@ public class ProductService {
                 .stream()
                 .map(productEntity -> modelMapper.map(productEntity, ProductDto.class))
                 .collect(Collectors.toList());
+    }
+
+    public List<ProductEntity> findByTitleContainingIgnoreCase(String title, String sortBy, Integer pageNumber) {
+
+
+        return productRepository.findByTitleContainingIgnoreCase(
+                title,
+                PageRequest.of(pageNumber, PAGE_SIZE, Sort.by(sortBy))
+        );
     }
 }
