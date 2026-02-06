@@ -13,11 +13,13 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
+    List<ProductEntity> findByTitleOrderByPrice(String title);
+
     List<ProductEntity> findByTitle(String title);
 
-    List<ProductEntity> findByCreatedAtAfter(LocalDateTime after);
+//    List<ProductEntity> findByCreatedAtAfter(LocalDateTime after);
 
-    List<ProductEntity> findByQuantityGraterThanAndPriceLessThan(int quantity, BigDecimal price);
+//    List<ProductEntity> findByQuantityGraterThanAndPriceLessThan(int quantity, BigDecimal price);
 
     List<ProductEntity> findByTitleLike(String title);
 
@@ -33,6 +35,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     //JPQL custom query used to fetch data from DB
     @Query("Select e from ProductEntity e where e.title=:title and e.price=:price")
     Optional<ProductEntity> findByTitleAndPrice(String coke, BigDecimal bigDecimal);
+
+    List<ProductEntity> findAllByOrderByPriceAsc();
 }
 
 /*  ***************** JPA (Java Persistence API)   *****************
